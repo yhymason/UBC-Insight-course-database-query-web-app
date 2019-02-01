@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UBC Insight UI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <script src="./jquery-3.2.0.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script src="./main.js"></script>
+    <style>
+        table, td, th {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+        img {
+            width: 1000px;
+        }
+        #room_sel, #course_sel {
+            width: 1000px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">UBCInsightUI</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#Default">Default</a></li>
+            <li><a href="#CoursesExplorer">CoursesExplorer</a></li>
+            <li><a href="#RoomsExplorer">RoomsExplorer</a></li>
+            <li><a href="#Scheduler">Scheduler</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="Default" role="tabpanel">
+        <h1>Courses Explorer</h1>
+        <h2>This interface provides following utilities</h2>
+        <h3>1, Explore all the UBC courses along with their detailed info.</h3>
+        <h3>2, Search for a certain course by given parameters</h3>
+        <h3>3, Visualize courses info by sorting over certain parameters</h3>
+        <h2>User Manuel for Courses Explorer</h2>
+        <h3>1, For text input forms, type in desired corresponding info otherwise leave blanks</h3>
+        <h4>Example(Search for all CPSC 310 with section size 100):</h4>
+        <img src="./e1.JPG" alt="example1">
+        <h3>2, For additional info selections, follow instructions for multi selects</h3>
+        <h4>Example(Displaying average, failing&passing count and course year additionally):</h4>
+        <img src="./e2.JPG" alt="example2">
+        <h3>3, For section size sorting, combine operations based on your needs</h3>
+        <h4>Example(Search for section size under ">=" operation):</h4>
+        <img src="./e3.JPG" alt="example3">
+        <h3>4, For parameter sorting, select sorting parameters based on your needs</h3>
+        <h4>Example(Sort over passing count first then failing count then course year):</h4>
+        <img src="./e4.JPG" alt="example4">
+        <h1>Rooms Explorer</h1>
+        <h2>This interface provides following utilities</h2>
+        <h3>1, Explore all the UBC class rooms along with their detailed info.</h3>
+        <h3>2, Search for a certain group of rooms by given parameters</h3>
+        <h3>3, Search for a certain group of rooms within a range of a certain building</h3>
+        <h3>4, Visualize rooms info by sorting over certain parameters</h3>
+        <h2>User Manuel for Rooms Explorer</h2>
+        <h3>1, For text input forms, type in desired corresponding info otherwise leave blanks</h3>
+        <h4>Example(Search for all DMP rooms with 100 seats within 1km range of BUCH):</h4>
+        <img src="./e5.JPG" alt="example5">
+        <h3>2, For additional info selections, follow instructions for multi selects</h3>
+        <h4>Example(Displaying latitude and longitude additionally):</h4>
+        <img src="./e6.JPG" alt="example6">
+        <h3>3, For section size sorting, combine operations based on your needs</h3>
+        <h4>Example(Search for room seats under ">" operation):</h4>
+        <img src="./e7.JPG" alt="example7">
+        <h3>4, For parameter sorting, select sorting parameters based on your needs</h3>
+        <h4>Example(Sort over room seats):</h4>
+        <img src="./e8.JPG" alt="example8">
+        <h1>Scheduler</h1>
+        <h2>This interface provides following utilities</h2>
+        <h3>1, Produce room-oriented schedules given a list of courses</h3>
+        <h3>2, Visualize quality of schedules</h3>
+        <h3>3, Predict newly schedule course section size</h3>
+        <h2>User Manuel for Rooms Explorer</h2>
+        <h3>1, Add a course based on department name and/or course number</h3>
+        <h3>2, Add a building based on building name and/or a range from a target building</h3>
+        <h3>3, Double check your inputs at the panels and reset any mis-inputs</h3>
+        <h3>4, Submit when you have at least one entry at both lists</h3>
+    </div>
+    <div class="tab-pane" id="CoursesExplorer" role="tabpanel">
+        <div class="container">
+            <form>
+                <div class="form-group" style="display: block">
+                    <h1>Specify your parameters below/leave blanks otherwise</h1>
+                    <div class="col-xs-2">
+                        <label for="dept">Department</label>
+                        <input class="form-control" id="dept" type="text">
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="num">Number</label>
+                        <input class="form-control" id="num" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="instructor">Instructor</label>
+                        <input class="form-control" id="instructor" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="title">Name/Title</label>
+                        <input class="form-control" id="title" type="text">
+                    </div>
+                    <div class="col-xs-2">
+                        <label for="size">Section Size</label>
+                        <input class="form-control" id="size" type="text">
+                    </div>
+                </div>
+                <div class="form-group" style="display: block">
+                    <h1>Additional Info Control</h1>
+                    <label for="sel0">Multiple select list (hold shift to select more than one):</label>
+                    <select multiple class="form-control" id="sel0">
+                        <option>Average</option>
+                        <option>Failing Count</option>
+                        <option>Passing Count</option>
+                        <option>Year</option>
+                        <option>Other Trivial Info</option>
+                    </select>
+                </div>
+                <div class="form-group" style="display: block">
+                    <h1>Operation on Section Size</h1>
+                    <label for="sel1">Multiple select list (hold shift to select more than one):</label>
+                    <select multiple class="form-control" id="sel1">
+                        <option>Greater Than</option>
+                        <option>Equal</option>
+                        <option>Less Than</option>
+                    </select>
+                </div>
+                <div class="form-group" style="display: block">
+                    <h1>Sorting Options</h1>
+                    <label for="sel2">Multiple select list (hold shift to select more than one):</label>
+                    <select multiple class="form-control" id="sel2">
+                        <option>courses_dept</option>
+                        <option>courses_id</option>
+                        <option>courses_avg</option>
+                        <option>courses_instructor</option>
+                        <option>courses_title</option>
+                        <option>courses_pass</option>
+                        <option>courses_fail</option>
+                        <option>courses_year</option>
+                    </select>
+                </div>
+            <button type="submit" id= "courses_submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="tab-pane" id="RoomsExplorer" role="tabpanel">
+        <div class="container">
+            <form>
+                <div class="form-group" style="display: block">
+                    <h1>Specify your parameters below/leave blanks otherwise</h1>
+                    <div class="col-xs-3">
+                        <label for="fullname">Building Fullname</label>
+                        <input class="form-control" id="fullname" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="shortname">Building Shortname</label>
+                        <input class="form-control" id="shortname" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="number">Number</label>
+                        <input class="form-control" id="number" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="seats">Number of seats</label>
+                        <input class="form-control" id="seats" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="type">Room Type</label>
+                        <input class="form-control" id="type" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="furniture">Furniture</label>
+                        <input class="form-control" id=furniture type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="target">Location Respect To:</label>
+                        <input class="form-control" id="target" type="text">
+                    </div>
+                    <div class="col-xs-3">
+                        <label for="range">Range in meters</label>
+                        <input class="form-control" id="range" type="text">
+                    </div>
+                </div>
+                <div class="form-group" style="display: block">
+                    <h1>Additional Info Control</h1>
+                    <label for="sel3">Multiple select list (hold shift to select more than one):</label>
+                    <select multiple class="form-control" id="sel3">
+                        <option>Address</option>
+                        <option>Longitude</option>
+                        <option>Latitude</option>
+                        <option>Other Trivial Info</option>
+                    </select>
+                </div>
+                <div class="form-group" style="display: block">
+                    <h1>Operation on Room Size</h1>
+                    <label for="sel4">Multiple select list (hold shift to select more than one):</label>
+                    <select multiple class="form-control" id="sel4">
+                        <option>Greater Than</option>
+                        <option>Equal</option>
+                        <option>Less Than</option>
+                    </select>
+                </div>
+                <div class="form-group" style="display: block">
+                    <h1>Sorting Options</h1>
+                    <label for="sel5">Multiple select list (hold shift to select more than one):</label>
+                    <select multiple class="form-control" id="sel5">
+                        <option>rooms_fullname</option>
+                        <option>rooms_shortname</option>
+                        <option>rooms_number</option>
+                        <option>rooms_address</option>
+                        <option>rooms_lon</option>
+                        <option>rooms_lat</option>
+                        <option>rooms_seats</option>
+                        <option>rooms_type</option>
+                        <option>rooms_furniture</option>
+                    </select>
+                </div>
+                <button type="submit" id= "rooms_submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="tab-pane" id="Scheduler" role="tabpanel">
+        <div class="container">
+            <form class="form-inline">
+                <h4>Choose a Department</h4>
+                <label class="mr-sm-2" for="inlineFormCustomSelect1">Make a selection</label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect1">
+
+                </select>
+                <button type="submit" id="s5" class="btn btn-primary">Search</button>
+                <h4>Choose a Number</h4>
+                <label class="mr-sm-2" for="inlineFormCustomSelect2">Make a selection</label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect2">
+
+                </select>
+                <button type="submit" id="s4" class="btn btn-primary">Search</button>
+                <h4>Or Add a specific course</h4>
+                <div class="form-group mx-sm-3">
+                    <label for="d" class="sr-only">Department</label>
+                    <input type="text" class="form-control" id="d" placeholder="Department">
+                </div>
+                <div class="form-group mx-sm-3">
+                    <label for="n" class="sr-only">Course Number</label>
+                    <input type="text" class="form-control" id="n" placeholder="Course Number">
+                </div>
+                <button type="submit" id="s3" class="btn btn-primary">Search</button>
+                <h4>Select Your Courses</h4>
+                <label for="course_sel">Multiple select list, room name followed by its size</label>
+                <select multiple class="form-control" id="course_sel">
+
+                </select>
+                <button type="submit" id="a1" class="btn btn-primary">Add</button>
+            </form>
+            <form class="form-inline">
+                <h4>Choose a Building</h4>
+                <label class="mr-sm-2" for="inlineFormCustomSelect3">Make a selection</label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect3">
+
+                </select>
+                <button type="submit" id="s1" class="btn btn-primary">Search</button>
+                <h4>Or Search for buildings within a range</h4>
+                <div class="form-group mx-sm-3">
+                    <label for="t" class="sr-only">Location Respect To:</label>
+                    <input type="text" class="form-control" id="t" placeholder="Building">
+                </div>
+                <div class="form-group mx-sm-3">
+                    <label for="r" class="sr-only">Range in meters</label>
+                    <input type="text" class="form-control" id="r" placeholder="Range">
+                </div>
+                <button type="submit" id="s2" class="btn btn-primary">Search</button>
+                <h4>Select Your Rooms</h4>
+                <label for="room_sel">Multiple select list, room name followed by its size</label>
+                <select multiple class="form-control" id="room_sel">
+
+                </select>
+                <button type="submit" id="a2" class="btn btn-primary">Add</button>
+
+            </form>
+            <h2>Confirm Your inputs Below</h2>
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title pull-left">
+                            Your Course Input, filtered by Department name or Course Number or combined
+                        </h3>
+                        <button type="submit" id="r1" class="btn btn-default pull-right">Reset</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body" id="p1"></div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title pull-left">
+                            Your Room List Input
+                        </h3>
+                        <button type="submit" id="r2" class="btn btn-default pull-right">Reset</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body" id="p2"></div>
+                </div>
+            </div>
+            <button type="submit" id="confirm" class="btn btn-primary">Confirm</button>
+            <button type="submit" id="report" class="btn btn-primary" disabled>Report</button>
+        </div>
+    </div>
+</div>
+<div id="output" style="width: 80%; margin: auto;">
+    <div class="panel-heading" id="output_head">
+
+    </div>
+    <div class="panel-body" id="output_body">
+
+    </div>
+</div>
+</body>
+</html>
